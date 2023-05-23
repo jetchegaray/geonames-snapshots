@@ -3,6 +3,8 @@
  The idea is improving the response of this website https://www.geonames.org/ having structured responses and cache when the service is down. 
 
 ## Technology Stack
+    - nodejs
+    - npm 
     - Typescript 4.9.5
     - Nestjs 9.4.2
     - Firebase/RealTime Database 
@@ -134,7 +136,40 @@ then you will be able to get a result
 
 
  ## Structures DTO examples 
- 
+   FullCountryDTO example ::::
+   
+   ```
+   "FullCountries": {
+    "AR": {
+      "geonameId": 3865483,
+      "iso": "AR",
+      "name": "Argentina",
+      "provinces": [
+        {
+           "geonameId": 3435907,
+           "lat": "-36",
+           "lng": "-60",
+           "toponymName": "Buenos Aires"
+          "cities": [
+            {
+              "geonameId": 3854937,
+              "lat": "-38",
+              "lng": "-60.25",
+              "toponymName": "Partido de Adolfo González Chaves"
+            },
+            {
+              "geonameId": 3436394,
+              "lat": "-34.83333",
+              "lng": "-58.33333",
+              "toponymName": "Partido de Almirante Brown"
+            },
+            .........
+           ]
+        }
+      ..........
+     ]
+    }
+```
  
  
  
