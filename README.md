@@ -1,36 +1,57 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+ The idea is improving the response of this website https://www.geonames.org/ having structured responses and cache when the service is down. 
+
+## Technology Stack
+    - Typescript 4.9.5
+    - Nestjs 9.4.2
+    - Firebase/RealTime Database 
+    - Redis 6.0.16
 
 ## Installation
 
 ```bash
 $ npm install
 ```
+
+## Environment variables 
+
+  update these variables as you need
+  
+  FIREBASE_PROJECT_ID=XXXXXXXXX
+  FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----XXXXXXXXXXXXXXX -----END PRIVATE KEY-----\n
+  FIREBASE_CLIENT_EMAIL=firebase-adminsdk-XXXX@XXXXXX.iam.gserviceaccount.com
+  FIREBASE_DATABASE_URL=https://XXXXXXX.firebasedatabase.app/
+  CACHE_TTL=15000
+  CACHE_HOST=localhost
+  CACHE_PORT=6379
+
+## Population data
+
+ There is a file countries-db-populated.json under data folder to populate the countries collection with all the countries in the  world
+ 
+ example :: 
+ ```
+ {
+  .....
+    {
+      "name": "Argentina",
+      "iso": "AR",
+      "geonameId": 3865483
+    },
+    {
+      "name": "American Samoa",
+      "iso": "AS",
+      "geonameId": 5880801
+    },
+    {
+      "name": "Austria",
+      "iso": "AT",
+      "geonameId": 2782113
+    },
+    ........
+ }
+ ```
 
 ## Running the app
 
@@ -58,16 +79,37 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## API swagger
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+ host/api --> to take a look at the swagger doc API. 
+ 
+ ## Functionality 
+ 
+ Under populateFullCountry controller you update your database with the countries what you need and it will create the collection called FullCountries with all the states/provinces per country and its corresponding cities. 
+ 
+ Under GeoPlaces controller you will discover endpoints to get all countries or an spacific country. To do that you need first to have the country in the database. So will need to run for example 
+ First populate into the DB the country you need
+  ```
+  curl -X 'GET' \
+   http://localhost:4000/populateFullCountry/provinces/AR/cities' \
+  -H 'accept: applation/json'
+ ```
+then you will be able to get a result 
+ 
+ ```
+  curl -X 'GET' \
+  'http://localhost:4000/geonames/provinces/AR/cities' \
+  -H 'accept: applation/json'
+ ```
+ the first time you call the methods under GeoPlaces controller, it will save the result into the cache. so next time you need it, it will be back from the cache. 
+ 
+ 
+ 
+ ## Structures DTO examples 
+ 
+ 
+ 
+ 
 
-## Stay in touch
+ 
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
