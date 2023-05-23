@@ -79,6 +79,8 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+
+
 ## API swagger
 
  host/api --> to take a look at the swagger doc API. 
@@ -103,12 +105,40 @@ then you will be able to get a result
  ```
  the first time you call the methods under GeoPlaces controller, it will save the result into the cache. so next time you need it, it will be back from the cache. 
  
+ ## Project Layout (Brief Explanation)
  
- 
+ .
+├── .env (Make sure to create this file locally and fill the env vars)
+├── data (data for pre-populate)
+├── src
+│   ├── main.ts (This entry point is used for local server)
+│   ├── database (Module implementation of Firebase realtime)
+│   │   ├── Firebase.service (service to talk to the DB, it could be act like a repository)
+│   ├── cache-redis (Module implementation of redis)
+│   │   ├── redis.service (service to talk to the cache store)
+│   ├── geonames (module)
+│   │   ├── controllers
+│   │   │    ├── dataMigrationController (main responsability is saving the API geonames in firebase calling the fullCountryService)
+│   │   │    └── geoNamesController (main responsability is interact to the services to get the data from the cache or falling that, the database, it calls ProvinceService amd CountryService)
+│   │   ├── services 
+│   │   │    ├── fullCountry (controls the fullCountry entity which is the DTO saved in the db, calls Firebase.service)
+│   │   │    ├── geonames (Manages the call the GeoNames API using Axios)
+│   │   │    ├── province (Manages the call to the province and cities per country)
+│   │   │    └── country (Manages the comunication with the country Firebase repository, second layer)
+│   │   ├── Intefaces (all interfaces to manage the data which API response in each endpoint)
+│   │   ├── DTO (FullCountryDTO to map to the database country-states-city)
+│   │   └── DTO (FullCountryDTO to map to the database country-states-city)
+
+│   └── shared (module with shared business logic)
+└── test (Contains the end-to-end (e2e) tests)
+
+
  ## Structures DTO examples 
  
  
  
+ 
+ ## Demo 
  
 
  
