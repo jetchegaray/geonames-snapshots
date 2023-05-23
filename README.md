@@ -113,3 +113,10 @@ then you will be able to get a result
 
  
 
+## GeoNames Data quota 
+
+free : GeoNames data is free, the data is available without costs.
+cc-by licence (creative commons attributions license). You should give credit to GeoNames when using data or web services with a link or another reference to GeoNames.
+commercial usage is allowed
+'as is' : The data is provided "as is" without warranty or any representation of accuracy, timeliness or completeness.
+20'000 credits daily limit per application (identified by the parameter 'username'), the hourly limit is 1000 credits. A credit is a web service request hit for most services. An exception is thrown when the limit is exceeded.
