@@ -3,8 +3,8 @@
  The idea is improving the response of this website https://www.geonames.org/ having structured responses and cache when the service is down. 
 
 ## Technology Stack
-    - nodejs
-    - npm 
+    - nodejs 18.16.0
+    - npm 9.5.1
     - Typescript 4.9.5
     - Nestjs 9.4.2
     - Firebase/RealTime Database 
