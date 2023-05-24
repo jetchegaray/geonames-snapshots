@@ -20,6 +20,8 @@ $ npm install
 
   update these variables as you need
   
+  ```
+  
   FIREBASE_PROJECT_ID=XXXXXXXXX
   FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----XXXXXXXXXXXXXXX -----END PRIVATE KEY-----\n
   FIREBASE_CLIENT_EMAIL=firebase-adminsdk-XXXX@XXXXXX.iam.gserviceaccount.com
@@ -27,6 +29,8 @@ $ npm install
   CACHE_TTL=15000
   CACHE_HOST=localhost
   CACHE_PORT=6379
+
+  ```
 
 ## Population data
 
@@ -123,12 +127,11 @@ then you will be able to get a result
 │   │   │    ├── dataMigrationController (main responsability is saving the API geonames in firebase calling the fullCountryService)
 │   │   │    └── geoNamesController (main responsability is interact to the services to get the data from the cache or falling that, the database, it calls ProvinceService amd CountryService)
 │   │   ├── services 
-│   │   │    ├── fullCountry (controls the fullCountry entity which is the DTO saved in the db, calls Firebase.service)
+│   │   │    ├── fullCountry (Manages the comunication with the Fullcountry Firebase collection)
 │   │   │    ├── geonames (Manages the call the GeoNames API using Axios)
 │   │   │    ├── province (Manages the call to the province and cities per country)
-│   │   │    └── country (Manages the comunication with the country Firebase repository, second layer)
-│   │   ├── Intefaces (all interfaces to manage the data which API response in each endpoint)
-│   │   ├── DTO (FullCountryDTO to map to the database country-states-city)
+│   │   │    └── country (Manages the comunication with the country Firebase collection, second layer)
+│   │   ├── Intefaces (all interfaces to manage the data which API response in each endpoint, country is the one to map to the entity into the database collection called countries)
 │   │   └── DTO (FullCountryDTO to map to the database country-states-city)
 
 │   └── shared (module with shared business logic)
