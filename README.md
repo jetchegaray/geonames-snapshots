@@ -2,6 +2,20 @@
 
  The idea is improving the response of this website https://www.geonames.org/ having structured responses and cache when the service is down. 
 
+## Table of Contents
+
+1. [Technology Stack](#Technology-Stack)
+1. [Installation](#Installation)
+1. [Environment variables](#Environment-variables)
+1. [Population data](#Population-data)
+1. [Running the app](#Running-the-app)
+1. [Test](#Test)
+1. [API swagger](#API-swagger)
+1. [Project Layout (Brief Explanation)](#Project-Layout-(Brief-Explanation))
+1. [Structures DTO examples](#Structures-DTO-examples)
+1. [Demo](#Demo)
+1. [GeoNames Data quota](#GeoNames-Data-quota)
+
 ## Technology Stack
     - nodejs 18.16.0
     - npm 9.5.1
@@ -112,7 +126,7 @@ then you will be able to get a result
  the first time you call the methods under GeoPlaces controller, it will save the result into the cache. so next time you need it, it will be back from the cache. 
  
  ## Project Layout (Brief Explanation)
- 
+ ```
  .
 ├── .env (Make sure to create this file locally and fill the env vars)
 ├── data (data for pre-populate)
@@ -136,7 +150,7 @@ then you will be able to get a result
 
 │   └── shared (module with shared business logic)
 └── test (Contains the end-to-end (e2e) tests)
-
+```
 
  ## Structures DTO examples 
    FullCountryDTO example ::::
