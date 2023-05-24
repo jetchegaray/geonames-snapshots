@@ -32,7 +32,7 @@ $ npm install
 
 ## Environment variables 
 
-  update these variables as you need
+  update these variables as you need, you are able to get them from https://app.redislabs.com/ and  https://console.firebase.google.com/ 
   
   ```
   
@@ -140,17 +140,22 @@ then you will be able to get a result
 │   │   ├── redis.service (service to talk to the cache store)
 │   ├── geonames (module)
 │   │   ├── controllers
-│   │   │    ├── dataMigrationController (main responsability is saving the API geonames in firebase calling the fullCountryService)
+│   │   │    ├── dataMigrationController (main responsability is saving the external API geonames in firebase calling the fullCountryService)
+│   │   │    ├── geoNamesSnapshotController (same as geoNamesController but returning the data within an snapshot or zip to save it in the callee microservice's host)
 │   │   │    └── geoNamesController (main responsability is interact to the services to get the data from the cache or falling that, the database, it calls ProvinceService amd CountryService)
 │   │   ├── services 
-│   │   │    ├── fullCountry (Manages the comunication with the Fullcountry Firebase collection)
+│   │   │    ├── fullCountry (Manages the comunication with the Fullcountry Firebase collection called FullCountry, country, states, cities)
 │   │   │    ├── geonames (Manages the call the GeoNames API using Axios)
 │   │   │    ├── province (Manages the call to the province and cities per country)
-│   │   │    └── country (Manages the comunication with the country Firebase collection, second layer)
-│   │   ├── Intefaces (all interfaces to manage the data which API response in each endpoint, country is the one to map to the entity into the database collection called countries)
+│   │   │    ├── zip (Manages the same functionality than country and fullCountry but returning an snapshot of the data)
+│   │   │    └── country (Manages the comunication with the country Firebase collection called Country, second layer)
+│   │   │
+│   │   ├── entities (Contains all the entities to manage the DAO and DTO objects) 
+│   │   ├── Intefaces (Manage the behaviour of objects when it is called geonames external API)
 │   │   └── DTO (FullCountryDTO to map to the database country-states-city)
-
-│   └── shared (module with shared business logic)
+│   │ 
+│   ├── interceptors (interceptos to manage logging and empty responses)   
+│   └── logger (module and logger service)
 └── test (Contains the end-to-end (e2e) tests)
 ```
 
