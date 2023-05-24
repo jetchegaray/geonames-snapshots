@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { CacheModule } from '@nestjs/cache-manager';
 import { GeonamesService } from './services/geonames.service';
 import { GeonamesController } from './controllers/geonames.controller';
 import { HttpModule } from '@nestjs/axios';
 import { CountryService } from './services/country.service';
 import { FirebaseModule } from '../database/firebase.module';
 import { ProvinceService } from './services/province.service';
-import { RedisModule } from 'src/cache-redis/redis.module';
+import { RedisModule } from '../cache-redis/redis.module';
 import { FullCountryService } from './services/fullCountry.service';
 import { DataMigrationController } from './controllers/dataMigration.controller';
 import { LoggerModule } from '../logger/logger.module';

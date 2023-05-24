@@ -18,7 +18,7 @@ import { FullCountryDTO } from '../dto/FullCountry';
 import { FullCountryService } from '../services/fullCountry.service';
 import { CountryService } from '../services/country.service';
 import { LoggingInterceptor } from '../../interceptors/logging.interceptor';
-import { NoResponseInterceptor } from 'src/interceptors/noResponse.interceptor';
+import { NoResponseInterceptor } from '../../interceptors/noResponse.interceptor';
 
 @ApiTags('downloadSnapshot')
 @UseInterceptors(LoggingInterceptor)
