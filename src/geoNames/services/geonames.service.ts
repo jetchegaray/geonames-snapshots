@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { GeoCountry } from '../interfaces/geocountry.interface';
+import { GeoCountry } from '../entities/geocountry.entity';
 import { GeoApi } from '../interfaces/geoApi.interface';
 import { catchError, firstValueFrom, map } from 'rxjs';
 import { Logger } from '@nestjs/common';
-import { AxiosError } from 'axios';
-import { ProvinceResponse } from '../interfaces/ProvinceResponse';
-import { GeoPlace } from '../interfaces/geoPlace.interface';
+import { AxiosError, AxiosResponse } from 'axios';
+import { GeoPlace } from '../entities/geoPlace.entity';
 
 @Injectable()
 export class GeonamesService {
@@ -26,7 +25,7 @@ export class GeonamesService {
           `${this.URL_BASE}${this.PARAM_NAME_ID}=${geonameId}&${this.PARAM_NAME_USERNAME}=${this.PARAM_USERNAME}`,
         )
         .pipe(
-          map((response) => {
+          map((response: AxiosResponse<GeoApi>) => {
             const places: GeoPlace[] =
               <GeoPlace[]>response?.data?.geonames || [];
 

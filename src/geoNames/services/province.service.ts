@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ProvinceResponse } from '../interfaces/ProvinceResponse';
+import { ProvinceResponse } from '../entities/ProvinceResponse.entity';
 import { GeonamesService } from './geonames.service';
-import { GeoCity, GeoProvince } from '../interfaces/geoPlace.interface';
+import { GeoCity, GeoProvince } from '../entities/geoPlace.entity';
 
 @Injectable()
 export class ProvinceService {
@@ -15,8 +15,6 @@ export class ProvinceService {
     );
     const updatedProvinces: Promise<GeoProvince>[] = provinces.map(
       async (province) => {
-        this.logger.debug(province.geonameId);
-
         const cities: GeoCity[] =
           <GeoCity[]>(
             await this.geonameService.getGeoEntities(province.geonameId)

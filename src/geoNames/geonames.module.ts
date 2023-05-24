@@ -10,6 +10,8 @@ import { RedisModule } from 'src/cache-redis/redis.module';
 import { FullCountryService } from './services/fullCountry.service';
 import { DataMigrationController } from './controllers/dataMigration.controller';
 import { LoggerModule } from '../logger/logger.module';
+import { GeonamesSnapshotController } from './controllers/geonamesSnapshot.controller';
+import { ZipService } from './services/zip.service';
 
 const httpModuleFactory = HttpModule.registerAsync({
   useFactory: () => ({
@@ -20,12 +22,17 @@ const httpModuleFactory = HttpModule.registerAsync({
 
 @Module({
   imports: [httpModuleFactory, FirebaseModule, RedisModule, LoggerModule],
-  controllers: [GeonamesController, DataMigrationController],
+  controllers: [
+    GeonamesController,
+    DataMigrationController,
+    GeonamesSnapshotController,
+  ],
   providers: [
     GeonamesService,
     CountryService,
     ProvinceService,
     FullCountryService,
+    ZipService,
   ],
 })
 export class GeonamesModule {}

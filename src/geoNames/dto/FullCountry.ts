@@ -1,10 +1,14 @@
-import { GeoProvince } from '../interfaces/geoPlace.interface';
+import { GeoProvince } from '../entities/geoPlace.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class FullCountryDTO {
+  @ApiProperty()
   name: string;
+  @ApiProperty()
   iso: string;
+  @ApiProperty()
   geonameId: number;
-
+  @ApiProperty({ type: () => [GeoProvince] })
   provinces: GeoProvince[];
 
   constructor(

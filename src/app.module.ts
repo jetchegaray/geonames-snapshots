@@ -1,14 +1,6 @@
-import {
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-  RequestMethod,
-} from '@nestjs/common';
-import { AppController } from './app.controller';
+import { Module } from '@nestjs/common';
 import { GeonamesModule } from './geoNames/geonames.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { loggerMiddeware } from './logger/logger.middleware';
-import helmet from 'helmet';
 
 @Module({
   imports: [
@@ -18,7 +10,7 @@ import helmet from 'helmet';
       envFilePath: '.env',
     }),
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}

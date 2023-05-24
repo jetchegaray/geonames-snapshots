@@ -1,8 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { GeoCountry } from '../interfaces/geocountry.interface';
+import { GeoCountry } from '../entities/geocountry.entity';
 import { Logger } from '@nestjs/common';
 import { FirebaseService } from '../../database/firebase.service';
-import { FullCountryDTO } from '../dto/FullCountry';
 
 @Injectable()
 export class CountryService {
@@ -21,9 +20,9 @@ export class CountryService {
     return countries;
   };
 
-  findCountryByISO = async (ISO: string): Promise<FullCountryDTO> => {
-    const countrySnapshot: Record<string, FullCountryDTO> =
-      await this.firebasService.getCountry<FullCountryDTO>(
+  findCountryByISO = async (ISO: string): Promise<GeoCountry> => {
+    const countrySnapshot: Record<string, GeoCountry> =
+      await this.firebasService.getCountry<GeoCountry>(
         this.DB_COUNTRY_NAME,
         ISO,
       );

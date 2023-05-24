@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { GeoCountry } from '../interfaces/geocountry.interface';
 import { Logger } from '@nestjs/common';
 import { FirebaseService } from '../../database/firebase.service';
 import { FullCountryDTO } from '../dto/FullCountry';
@@ -18,17 +17,22 @@ export class FullCountryService {
     );
   };
 
-  findFullCountry = async (ISO: string): Promise<FullCountryDTO> => {
-    const countrySnapshot: Record<string, FullCountryDTO> =
+  findFullCountry = async (
+    ISO: string,
+  ): Promise<FullCountryDTO | undefined> => {
+    const fullCountrySnapshot: Record<string, FullCountryDTO> =
       await this.firebasService.getFullCountry<FullCountryDTO>(
         this.DB_FULL_COUNTRY_NAME,
         ISO,
       );
 
-    const [country] = Object.keys(countrySnapshot).map(
-      (key) => countrySnapshot[key],
+    if (!fullCountrySnapshot) {
+      return undefined;
+    }
+
+    const [country] = Object.keys(fullCountrySnapshot).map(
+      (key) => fullCountrySnapshot[key],
     );
-    this.logger.debug(country);
     return country;
   };
 }

@@ -1,15 +1,23 @@
-import { Controller, Get, Logger, Param } from '@nestjs/common';
-import { GeoCountry } from '../interfaces/geocountry.interface';
+import {
+  Controller,
+  Logger,
+  Param,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
+import { GeoCountry } from '../entities/geocountry.entity';
 import { CountryService } from '../services/country.service';
-import { ProvinceResponse } from '../interfaces/ProvinceResponse';
+import { ProvinceResponse } from '../entities/ProvinceResponse.entity';
 import { ProvinceService } from '../services/province.service';
 
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { FullCountryService } from '../services/fullCountry.service';
 import { FullCountryDTO } from '../dto/FullCountry';
+import { LoggingInterceptor } from '../../interceptors/logging.interceptor';
 
 @ApiTags('populateFullCountry')
-@Controller('populateFullCountry')
+@UseInterceptors(LoggingInterceptor)
+@Controller('populate')
 export class DataMigrationController {
   private logger = new Logger(DataMigrationController.name);
 
@@ -19,12 +27,8 @@ export class DataMigrationController {
     private readonly fullCountryService: FullCountryService,
   ) {}
 
-  @ApiOperation({
-    summary:
-      'Get all the provinces/states from the API for a country and save the data into the DB',
-  })
-  @ApiResponse({ status: 200, description: 'Successful response' })
-  @Get('provinces/:ISO/cities')
+  @ApiCreatedResponse({ type: FullCountryDTO })
+  @Post('provinces/:ISO/cities')
   async populateProvincesAndCitiesByCountry(
     @Param('ISO')
     countryISO: string,
@@ -41,7 +45,6 @@ export class DataMigrationController {
       dbCountry.geonameId,
       apiProvinces.provinces,
     );
-    this.logger.log(fullCountryDTO);
 
     return this.fullCountryService.saveFullCountry(fullCountryDTO);
   }

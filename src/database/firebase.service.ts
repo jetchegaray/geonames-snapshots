@@ -1,7 +1,6 @@
 import { Injectable, Logger, Inject } from '@nestjs/common';
-import { query } from 'express';
 import * as admin from 'firebase-admin';
-import { FullCountryDTO } from 'src/geoNames/dto/FullCountry';
+import { FullCountryDTO } from '../geoNames/dto/FullCountry';
 
 @Injectable()
 export class FirebaseService {
@@ -27,7 +26,7 @@ export class FirebaseService {
     ISO: string,
   ): Promise<Record<string, T>> => {
     const queryRef: admin.database.Reference = this.database.ref(snapshotName);
-    this.logger.debug(ISO);
+    this.logger.debug(`querying for ISO :: ${ISO}`);
     const snapshot: admin.database.DataSnapshot = await queryRef
       .orderByChild('iso')
       .equalTo(ISO)

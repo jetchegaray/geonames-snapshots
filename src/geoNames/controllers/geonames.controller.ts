@@ -2,80 +2,93 @@ import {
   Controller,
   Get,
   Logger,
+  NotFoundException,
   Param,
+  Res,
   UseInterceptors,
 } from '@nestjs/common';
-import { GeoCountry } from '../interfaces/geocountry.interface';
+import { GeoCountry } from '../entities/geocountry.entity';
 import { CountryService } from '../services/country.service';
-import { ProvinceResponse } from '../interfaces/ProvinceResponse';
-import { ProvinceService } from '../services/province.service';
-import { SnapshotInterceptor } from '../../interceptors/snapshot.interceptor';
+import { ProvinceResponse } from '../entities/ProvinceResponse.entity';
 import { RedisService } from '../../cache-redis/redis.service';
+import { Response } from 'express';
 
 import {
+  ApiBadRequestResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
-  ApiOperation,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { FullCountryDTO } from '../dto/FullCountry';
+import { FullCountryService } from '../services/fullCountry.service';
+import { CountryResponse } from '../entities/CountryResponse.entity';
+import { LoggingInterceptor } from '../../interceptors/logging.interceptor';
+import { NoResponseInterceptor } from '../../interceptors/noResponse.interceptor';
 
 @ApiTags('geoPlaces')
+@UseInterceptors(LoggingInterceptor)
 @Controller('geonames')
 export class GeonamesController {
   private logger = new Logger(GeonamesController.name);
 
   constructor(
-    private readonly provinceService: ProvinceService,
+    private readonly fullCountryService: FullCountryService,
     private readonly countryService: CountryService,
     private readonly redisService: RedisService,
   ) {}
 
-  @ApiOperation({ summary: 'Get all the provinces/states for a country' })
-  @ApiResponse({ status: 200, description: 'Successful response' })
   @ApiOkResponse({ type: ProvinceResponse })
+  @ApiBadRequestResponse()
+  @ApiNotFoundResponse()
   @Get('provinces/:ISO/cities')
+  @UseInterceptors(
+    new NoResponseInterceptor(
+      'Entity not found! you may want to populate first the country you need',
+    ),
+  )
   async getProvincesAndCitiesByCountry(
     @Param('ISO')
     countryISO: string,
-  ): Promise<ProvinceResponse> {
-    const localKey = `countries::get::one::${countryISO}`;
+    @Res() response: Response,
+  ): Promise<ProvinceResponse | undefined> {
+    const localKey = `fullCountries::get::one::${countryISO}`;
 
     const provinceResponse: ProvinceResponse | undefined =
       await this.redisService.get<ProvinceResponse>(localKey);
 
-    this.logger.log(
+    this.logger.debug(
       `${
         provinceResponse
           ? '::::Comming from cache'
           : '::::Comming from database'
       }`,
     );
-
     //if cache does not have results --> I will look at the DB
     if (!provinceResponse) {
-      const dbCountry: FullCountryDTO =
-        await this.countryService.findCountryByISO(countryISO);
+      const dbFullCountry: FullCountryDTO | undefined =
+        await this.fullCountryService.findFullCountry(countryISO);
+
+      // cached by the interceptor
+      if (!dbFullCountry) {
+        return undefined;
+      }
 
       const provinceResponseDB: ProvinceResponse = new ProvinceResponse(
-        dbCountry.provinces,
+        dbFullCountry.provinces,
       );
 
       await this.redisService.set(localKey, JSON.stringify(provinceResponseDB));
-
       return provinceResponseDB;
     }
 
     return provinceResponse;
   }
 
-  @ApiOperation({
-    summary: 'Get All the countries of the world',
-  })
-  @ApiOkResponse({ type: [GeoCountry] })
-  //@UseInterceptors(SnapshotInterceptor)
+  @ApiOkResponse({ type: CountryResponse })
+  @ApiBadRequestResponse()
+  @ApiNotFoundResponse()
   @Get('countries')
-  async getAllCountries(): Promise<GeoCountry[]> {
+  async getAllCountries(): Promise<CountryResponse> {
     const localKey: string = 'countries::get::all';
     const countries: GeoCountry[] | undefined = await this.redisService.get<
       GeoCountry[]
@@ -87,9 +100,9 @@ export class GeonamesController {
     if (!countries) {
       const dbCountries = await this.countryService.findAllCountries();
       await this.redisService.set(localKey, JSON.stringify(dbCountries));
-      return dbCountries;
+      return new CountryResponse(dbCountries);
     }
 
-    return countries;
+    return new CountryResponse(countries);
   }
 }
