@@ -202,3 +202,49 @@ cc-by licence (creative commons attributions license). You should give credit to
 commercial usage is allowed
 'as is' : The data is provided "as is" without warranty or any representation of accuracy, timeliness or completeness.
 20'000 credits daily limit per application (identified by the parameter 'username'), the hourly limit is 1000 credits. A credit is a web service request hit for most services. An exception is thrown when the limit is exceeded.
+
+
+## Coverage 
+
+```
+---------------------------------|---------|----------|---------|---------|-------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------
+All files                        |   54.86 |    13.46 |   48.43 |   54.57 |                   
+ src                             |       0 |        0 |       0 |       0 |                   
+  app.module.ts                  |       0 |      100 |     100 |       0 | 1-16              
+  main.ts                        |       0 |        0 |       0 |       0 | 1-21              
+ src/cache-redis                 |   20.83 |        0 |       0 |      15 |                   
+  redis.module.ts                |       0 |      100 |       0 |       0 | 1-24              
+  redis.service.ts               |   35.71 |        0 |       0 |      25 | 13-31             
+ src/database                    |   13.51 |        0 |       0 |    9.09 |                   
+  firebase.module.ts             |       0 |        0 |       0 |       0 | 1-33              
+  firebase.service.ts            |   19.23 |      100 |       0 |    12.5 | 8-60              
+ src/geoNames                    |       0 |      100 |       0 |       0 |                   
+  geonames.module.ts             |       0 |      100 |       0 |       0 | 1-38              
+ src/geoNames/controllers        |   56.98 |       50 |    62.5 |   56.32 |                   
+  dataMigration.controller.ts    |     100 |      100 |     100 |     100 |                   
+  geonames.controller.ts         |     100 |      100 |     100 |     100 |                   
+  geonamesSnapshot.controller.ts |       0 |        0 |       0 |       0 | 1-119             
+ src/geoNames/dto                |   91.66 |      100 |      50 |     100 |                   
+  FullCountry.ts                 |   91.66 |      100 |      50 |     100 |                   
+ src/geoNames/entities           |   91.89 |      100 |   66.66 |     100 |                   
+  CountryResponse.entity.ts      |   83.33 |      100 |      50 |     100 |                   
+  ProvinceResponse.entity.ts     |   83.33 |      100 |      50 |     100 |                   
+  geoPlace.entity.ts             |   94.11 |      100 |      75 |     100 |                   
+  geocountry.entity.ts           |     100 |      100 |     100 |     100 |                   
+ src/geoNames/services           |   85.05 |        5 |   76.19 |   84.21 |                   
+  country.service.ts             |     100 |      100 |     100 |     100 |                   
+  fullCountry.service.ts         |     100 |      100 |     100 |     100 |                   
+  geonames.service.ts            |      35 |        0 |       0 |   29.41 | 12-47             
+  province.service.ts            |     100 |       50 |     100 |     100 | 19                
+  zip.service.ts                 |     100 |      100 |     100 |     100 |                   
+ src/interceptors                |   33.33 |        0 |      20 |   31.81 |                   
+  logging.interceptor.ts         |      45 |      100 |   33.33 |   38.88 | 19-33             
+  noResponse.interceptor.ts      |       0 |        0 |       0 |       0 | 1-13              
+ src/logger                      |   70.58 |        0 |   28.57 |   61.53 |                   
+  logger.module.ts               |     100 |      100 |     100 |     100 |                   
+  logger.service.ts              |   58.33 |        0 |   28.57 |      50 | 27-52             
+---------------------------------|---------|----------|---------|---------|-------------------
+
+```
