@@ -43,7 +43,9 @@ $ npm install
   CACHE_TTL=15000
   CACHE_HOST=localhost
   CACHE_PORT=6379
-
+  CACHE_USERNAME=default
+  CACHE_PASSWORD=XXXXXXXXXXXXXXXXXXXXX
+  
   ```
 
 ## Population data
