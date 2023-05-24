@@ -11,6 +11,8 @@ const redisModuleFactory = CacheModule.registerAsync({
     store: redisStore,
     host: configService.get('CACHE_HOST'),
     port: configService.get('CACHE_PORT'),
+    username: configService.get('CACHE_USERNAME'),
+    password: configService.get('CACHE_PASSWORD'),
   }),
   inject: [ConfigService],
 });
