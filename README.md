@@ -1,6 +1,6 @@
 ## Description
 
- The idea is improving the response of this website https://www.geonames.org/ having structured responses and cache when the service is down. 
+ The idea is improving the response of this website https://www.geonames.org/ having better structured responses, reducing times hitting to get the same data. Using Redis to cache the responses in case the DB or the api are down and finally I implemented a snapshot services to get a zip with the data to be consumed for others microservices in order to save it in its own disk, avoiding API resilience or Kafka latency.    
 
 ## Table of Contents
 
@@ -194,7 +194,7 @@ then you will be able to get a result
  
  ## Demo 
  
-
+ [Here](https://geonames-snapshots-glnahupqx-jetchegaray.vercel.app/swagger#/)
  
 
 ## GeoNames Data quota 
@@ -207,6 +207,8 @@ commercial usage is allowed
 
 
 ## Coverage 
+
+It is missing some testing .. collaboration always will be well received
 
 ```
 ---------------------------------|---------|----------|---------|---------|-------------------
