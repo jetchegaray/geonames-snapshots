@@ -215,45 +215,44 @@ commercial usage is allowed
 
 It is missing some testing .. collaboration always will be well received
 
-```
----------------------------------|---------|----------|---------|---------|-------------------
-File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
----------------------------------|---------|----------|---------|---------|-------------------
-All files                        |   54.86 |    13.46 |   48.43 |   54.57 |                   
- src                             |       0 |        0 |       0 |       0 |                   
-  app.module.ts                  |       0 |      100 |     100 |       0 | 1-16              
-  main.ts                        |       0 |        0 |       0 |       0 | 1-21              
- src/cache-redis                 |   20.83 |        0 |       0 |      15 |                   
-  redis.module.ts                |       0 |      100 |       0 |       0 | 1-24              
-  redis.service.ts               |   35.71 |        0 |       0 |      25 | 13-31             
- src/database                    |   13.51 |        0 |       0 |    9.09 |                   
-  firebase.module.ts             |       0 |        0 |       0 |       0 | 1-33              
-  firebase.service.ts            |   19.23 |      100 |       0 |    12.5 | 8-60              
- src/geoNames                    |       0 |      100 |       0 |       0 |                   
-  geonames.module.ts             |       0 |      100 |       0 |       0 | 1-38              
- src/geoNames/controllers        |   56.98 |       50 |    62.5 |   56.32 |                   
-  dataMigration.controller.ts    |     100 |      100 |     100 |     100 |                   
-  geonames.controller.ts         |     100 |      100 |     100 |     100 |                   
-  geonamesSnapshot.controller.ts |       0 |        0 |       0 |       0 | 1-119             
- src/geoNames/dto                |   91.66 |      100 |      50 |     100 |                   
-  FullCountry.ts                 |   91.66 |      100 |      50 |     100 |                   
- src/geoNames/entities           |   91.89 |      100 |   66.66 |     100 |                   
-  CountryResponse.entity.ts      |   83.33 |      100 |      50 |     100 |                   
-  ProvinceResponse.entity.ts     |   83.33 |      100 |      50 |     100 |                   
-  geoPlace.entity.ts             |   94.11 |      100 |      75 |     100 |                   
-  geocountry.entity.ts           |     100 |      100 |     100 |     100 |                   
- src/geoNames/services           |   85.05 |        5 |   76.19 |   84.21 |                   
-  country.service.ts             |     100 |      100 |     100 |     100 |                   
-  fullCountry.service.ts         |     100 |      100 |     100 |     100 |                   
-  geonames.service.ts            |      35 |        0 |       0 |   29.41 | 12-47             
-  province.service.ts            |     100 |       50 |     100 |     100 | 19                
-  zip.service.ts                 |     100 |      100 |     100 |     100 |                   
- src/interceptors                |   33.33 |        0 |      20 |   31.81 |                   
-  logging.interceptor.ts         |      45 |      100 |   33.33 |   38.88 | 19-33             
-  noResponse.interceptor.ts      |       0 |        0 |       0 |       0 | 1-13              
- src/logger                      |   70.58 |        0 |   28.57 |   61.53 |                   
-  logger.module.ts               |     100 |      100 |     100 |     100 |                   
-  logger.service.ts              |   58.33 |        0 |   28.57 |      50 | 27-52             
----------------------------------|---------|----------|---------|---------|-------------------
+```----------------------------------|---------|----------|---------|---------|-------------------
+File                              | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------------------------------|---------|----------|---------|---------|-------------------
+All files                         |   59.53 |    18.51 |   56.92 |   59.06 |                   
+ src                              |       0 |        0 |       0 |       0 |                   
+  app.module.ts                   |       0 |      100 |     100 |       0 | 1-16              
+  main.ts                         |       0 |        0 |       0 |       0 | 1-36              
+ src/cache-redis                  |   20.83 |        0 |       0 |      15 |                   
+  redis.module.ts                 |       0 |      100 |       0 |       0 | 1-26              
+  redis.service.ts                |   35.71 |        0 |       0 |      25 | 13-31             
+ src/database                     |   13.51 |        0 |       0 |    9.09 |                   
+  firebase.module.ts              |       0 |        0 |       0 |       0 | 1-33              
+  firebase.service.ts             |   19.23 |      100 |       0 |    12.5 | 8-60              
+ src/geoNames                     |       0 |      100 |       0 |       0 |                   
+  geonames.module.ts              |       0 |      100 |       0 |       0 | 1-37              
+ src/geoNames/controllers         |      55 |    42.85 |    62.5 |   54.25 |                   
+  data-migration.controller.ts    |     100 |      100 |     100 |     100 |                   
+  geonames-snapshot.controller.ts |       0 |        0 |       0 |       0 | 1-129             
+  geonames.controller.ts          |   97.29 |    85.71 |     100 |   97.14 | 72                
+ src/geoNames/dto                 |   91.66 |      100 |      50 |     100 |                   
+  Fullcountry.ts                  |   91.66 |      100 |      50 |     100 |                   
+ src/geoNames/entities            |   91.89 |      100 |   66.66 |     100 |                   
+  country-response.entity.ts      |   83.33 |      100 |      50 |     100 |                   
+  geocountry.entity.ts            |     100 |      100 |     100 |     100 |                   
+  geoplace.entity.ts              |   94.11 |      100 |      75 |     100 |                   
+  province-response.entity.ts     |   83.33 |      100 |      50 |     100 |                   
+ src/geoNames/services            |   84.26 |     4.76 |   76.19 |   83.33 |                   
+  country.service.ts              |     100 |      100 |     100 |     100 |                   
+  fullcountry.service.ts          |   94.44 |        0 |     100 |   93.75 | 30                
+  geonames.service.ts             |      35 |        0 |       0 |   29.41 | 11-46             
+  province.service.ts             |     100 |       50 |     100 |     100 | 19                
+  zip.service.ts                  |     100 |      100 |     100 |     100 |                   
+ src/interceptors                 |     100 |      100 |     100 |     100 |                   
+  logging.interceptor.ts          |     100 |      100 |     100 |     100 |                   
+  no-response.interceptor.ts      |     100 |      100 |     100 |     100 |                   
+ src/logger                       |   76.47 |       20 |   42.85 |   69.23 |                   
+  logger.module.ts                |     100 |      100 |     100 |     100 |                   
+  logger.service.ts               |   66.66 |       20 |   42.85 |      60 | 33-52             
+----------------------------------|---------|----------|---------|---------|-------------------
 
 ```
