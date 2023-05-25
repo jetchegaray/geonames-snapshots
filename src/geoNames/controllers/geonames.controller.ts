@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { GeoCountry } from '../entities/geocountry.entity';
 import { CountryService } from '../services/country.service';
-import { ProvinceResponse } from '../entities/ProvinceResponse.entity';
+import { ProvinceResponse } from '../entities/province-response.entity';
 import { RedisService } from '../../cache-redis/redis.service';
 import { Response } from 'express';
 
@@ -19,11 +19,11 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { FullCountryDTO } from '../dto/FullCountry';
-import { FullCountryService } from '../services/fullCountry.service';
-import { CountryResponse } from '../entities/CountryResponse.entity';
+import { FullCountryDTO } from '../dto/Fullcountry';
+import { FullCountryService } from '../services/fullcountry.service';
+import { CountryResponse } from '../entities/country-response.entity';
 import { LoggingInterceptor } from '../../interceptors/logging.interceptor';
-import { NoResponseInterceptor } from '../../interceptors/noResponse.interceptor';
+import { NoResponseInterceptor } from '../../interceptors/no-response.interceptor';
 
 @ApiTags('geoPlaces')
 @UseInterceptors(LoggingInterceptor)
@@ -49,7 +49,6 @@ export class GeonamesController {
   async getProvincesAndCitiesByCountry(
     @Param('ISO')
     countryISO: string,
-    @Res() response: Response,
   ): Promise<ProvinceResponse | undefined> {
     const localKey = `fullCountries::get::one::${countryISO}`;
 

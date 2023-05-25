@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ProvinceResponse } from '../entities/ProvinceResponse.entity';
+import { ProvinceResponse } from '../entities/province-response.entity';
 import { GeonamesService } from './geonames.service';
-import { GeoCity, GeoProvince } from '../entities/geoPlace.entity';
+import { GeoCity, GeoProvince } from '../entities/geoplace.entity';
 
 @Injectable()
 export class ProvinceService {

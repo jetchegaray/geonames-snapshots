@@ -1,15 +1,15 @@
 import { Test } from '@nestjs/testing';
 import { GeonamesController } from './geonames.controller';
-import { FullCountryService } from '../services/fullCountry.service';
+import { FullCountryService } from '../services/fullcountry.service';
 import { CountryService } from '../services/country.service';
 import { RedisService } from '../../cache-redis/redis.service';
-import { ProvinceResponse } from '../entities/ProvinceResponse.entity';
-import { FullCountryDTO } from '../dto/FullCountry';
+import { ProvinceResponse } from '../entities/province-response.entity';
+import { FullCountryDTO } from '../dto/Fullcountry';
 import { GeoCountry } from '../entities/geocountry.entity';
-import { CountryResponse } from '../entities/CountryResponse.entity';
+import { CountryResponse } from '../entities/country-response.entity';
 import { LoggingInterceptor } from '../../interceptors/logging.interceptor';
 import { LoggerModule } from '../../logger/logger.module';
-import { GeoCity, GeoProvince } from '../entities/geoPlace.entity';
+import { GeoCity, GeoProvince } from '../entities/geoplace.entity';
 import { HttpStatus } from '@nestjs/common';
 
 describe('GeonamesController', () => {
@@ -74,14 +74,8 @@ describe('GeonamesController', () => {
         .spyOn(redisService, 'get')
         .mockResolvedValue(new ProvinceResponse(mockProvinces));
 
-      const mockResponse = {
-        json: (body?: any) => {},
-        status: (code: number) => HttpStatus.OK,
-      };
-
       const result = await geonamesController.getProvincesAndCitiesByCountry(
         'US',
-        mockResponse,
       );
 
       expect(redisService.get).toHaveBeenCalledWith(
@@ -115,7 +109,7 @@ describe('GeonamesController', () => {
         .spyOn(fullCountryService, 'findFullCountry')
         .mockResolvedValue(mockFullCountryDTO);
 
-      const result: ProvinceResponse =
+      const result: ProvinceResponse | undefined =
         await geonamesController.getProvincesAndCitiesByCountry('US');
 
       expect(redisService.get).toHaveBeenCalledWith(

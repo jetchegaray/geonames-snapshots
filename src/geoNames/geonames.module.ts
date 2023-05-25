@@ -6,10 +6,10 @@ import { CountryService } from './services/country.service';
 import { FirebaseModule } from '../database/firebase.module';
 import { ProvinceService } from './services/province.service';
 import { RedisModule } from '../cache-redis/redis.module';
-import { FullCountryService } from './services/fullCountry.service';
-import { DataMigrationController } from './controllers/dataMigration.controller';
+import { FullCountryService } from './services/fullcountry.service';
+import { DataMigrationController } from './controllers/data-migration.controller';
 import { LoggerModule } from '../logger/logger.module';
-import { GeonamesSnapshotController } from './controllers/geonamesSnapshot.controller';
+import { GeonamesSnapshotController } from './controllers/geonames-snapshot.controller';
 import { ZipService } from './services/zip.service';
 
 const httpModuleFactory = HttpModule.registerAsync({

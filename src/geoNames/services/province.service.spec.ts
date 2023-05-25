@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { ProvinceService } from './province.service';
 import { GeonamesService } from './geonames.service';
-import { ProvinceResponse } from '../entities/ProvinceResponse.entity';
-import { GeoCity, GeoProvince } from '../entities/geoPlace.entity';
+import { ProvinceResponse } from '../entities/province-response.entity';
+import { GeoCity, GeoProvince } from '../entities/geoplace.entity';
 
 describe('ProvinceService', () => {
   let provinceService: ProvinceService;

@@ -1,6 +1,6 @@
 import { Injectable, Logger, Inject } from '@nestjs/common';
 import * as admin from 'firebase-admin';
-import { FullCountryDTO } from '../geoNames/dto/FullCountry';
+import { FullCountryDTO } from '../geoNames/dto/Fullcountry';
 
 @Injectable()
 export class FirebaseService {

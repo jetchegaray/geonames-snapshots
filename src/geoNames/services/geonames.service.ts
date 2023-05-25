@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { GeoCountry } from '../entities/geocountry.entity';
-import { GeoApi } from '../interfaces/geoApi.interface';
+import { GeoApi } from '../interfaces/geoapi.interface';
 import { catchError, firstValueFrom, map } from 'rxjs';
 import { Logger } from '@nestjs/common';
 import { AxiosError, AxiosResponse } from 'axios';
-import { GeoPlace } from '../entities/geoPlace.entity';
+import { GeoPlace } from '../entities/geoplace.entity';
 
 @Injectable()
 export class GeonamesService {
