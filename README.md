@@ -19,6 +19,9 @@
 ## Technology Stack
     - nodejs 18.16.0
     - npm 9.5.1
+    - reacjs 18.0.2
+    - react-scripts 5.0.1
+    - axios 1.4.0 
     - Typescript 4.9.5
     - Nestjs 9.4.2
     - Firebase/RealTime Database 
